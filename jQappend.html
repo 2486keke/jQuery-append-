@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<!--需要引入jq-->
+		<!-- <script src="js/jquery-1.8.3.min.js"></script> -->
+		<script src="js/jquery-2.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<title>jQuery append方法</title>
+		<style type="text/css">
+			.bigBox {
+				border: 1px solid black;
+			}
+
+			.inputDiv {
+				border: 1px solid red;
+			}
+		</style>
+	</head>
+	<body>
+		<button class="addBtn">增加</button>
+		<div class="bigBox">
+			<div class="inputDiv">
+				<input type="text" placeholder="0" />
+				<button class="delBtn">删除</button>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		//用于区分
+		var flag = 0;
+		//点击事件append
+		$(".addBtn").on("click", function() {
+			flag++;
+			var html = '<div class="inputDiv"><input type="text" placeholder=' + flag +
+				'> <button class="delBtn">删除</button></div>'
+			$(".bigBox").append(html);
+			delDivFn(".delBtn");
+		})
+		//删除当前节点的父节点，若与需求有出入，按照思路找到当前节点与需要删除的节点关系即可删除
+		function delDivFn(dom) {
+			$(dom).on("click", function() {
+				$(this).parent().remove();
+			})
+		}
+		delDivFn(".delBtn");
+	</script>
+</html>
